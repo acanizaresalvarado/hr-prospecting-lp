@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Compass — HR &amp; Candidate Prospecting &amp; Matching</title>
+    <meta name="description"
+        content="Turn hiring chaos into a 24/7 growth engine. AI Compass automates HR prospecting, prioritizes accounts by Hiring Momentum, matches candidates with roles, and powers outreach — all with verified data and credit-based control." />
+    <meta property="og:title" content="AI Compass — HR & Candidate Prospecting & Matching" />
+    <meta property="og:description"
+        content="Automate sourcing, identify who’s hiring today, get decision‑makers when you need them, and match candidates instantly. Start a 30‑day pilot." />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0B5FFF" />
+    <style>
+        :root {
+            --bg: #05070d;
+            --panel: #0b1020;
+            --muted: #9aa3b2;
+            --text: #eaf0ff;
+            --accent: #5ab1ff;
+            --accent-2: #8a5bff;
+            --ok: #46d49b;
+            --warn: #ffd166;
+            --danger: #ff6b6b;
+            --ring: 0 0 0 3px rgba(90, 177, 255, .25);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .04);
+            --radius: 14px;
+            --radius-sm: 10px;
+            --radius-xs: 8px;
+            --space: clamp(16px, 2vw, 24px);
+            --maxw: 1200px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(1200px 600px at 10% -10%, rgba(90, 177, 255, .18), transparent),
+                radial-gradient(900px 500px at 90% -20%, rgba(138, 91, 255, .20), transparent),
+                linear-gradient(180deg, #070a14 0%, #05070d 60%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        .container {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 var(--space)
+        }
+
+        .stack {
+            display: grid;
+            gap: clamp(16px, 2.2vw, 28px)
+        }
+
+        header.site {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+            background: rgba(5, 7, 13, .5);
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        .site-inner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px var(--space)
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            letter-spacing: .2px
+        }
+
+        .brand svg {
+            flex: 0 0 auto
+        }
+
+        nav ul {
+            display: flex;
+            gap: 18px;
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        nav a {
+            color: #cfe0ff;
+            font-weight: 550;
+            opacity: .9
+        }
+
+        nav a:hover {
+            opacity: 1
+        }
+
+        .cta {
+            appearance: none;
+            border: 0;
+            border-radius: 999px;
+            padding: 12px 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+            color: #061022;
+            box-shadow: var(--shadow-lg);
+            transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05)
+        }
+
+        .cta.secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, .18);
+            box-shadow: none
+        }
+
+        .hero {
+            padding: 64px 0 32px;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 56px);
+            line-height: 1.05;
+            margin: 0 0 16px;
+            letter-spacing: .2px
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #B9C8E6;
+            font-weight: 650;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: .16em
+        }
+
+        .eyebrow .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--ok)
+        }
+
+        .hero p.lede {
+            font-size: clamp(18px, 2.5vw, 22px);
+            color: #d9e6ff;
+            max-width: 50ch
+        }
+
+        .hero .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px
+        }
+
+        .panel {
+            background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+            border: 1px solid rgba(255, 255, 255, .10);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            padding: 12px var(--space);
+            color: #b8c6de;
+            border-top: 1px solid rgba(255, 255, 255, .05)
+        }
+
+        .strip small {
+            opacity: .9
+        }
+
+        .problem,
+        .solution,
+        .how,
+        .benefits,
+        .metrics,
+        .services,
+        .pricing,
+        .faq,
+        .cta-final {
+            padding: 48px 0
+        }
+
+        .section-title {
+            font-size: clamp(26px, 3.4vw, 38px);
+            margin: 0 0 16px
+        }
+
+        .section-sub {
+            color: #bcd0f4;
+            margin: 0 0 8px
+        }
+
+        .grid {
+            display: grid;
+            gap: 16px
+        }
+
+        .grid.cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr))
+        }
+
+        .grid.cols-3 {
+            grid-template-columns: repeat(3, minmax(0, 1fr))
+        }
+
+        .grid.cols-4 {
+            grid-template-columns: repeat(4, minmax(0, 1fr))
+        }
+
+        @media (max-width: 960px) {
+            .grid.cols-4 {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+
+            .grid.cols-3 {
+                grid-template-columns: repeat(1, minmax(0, 1fr))
+            }
+
+            .grid.cols-2 {
+                grid-template-columns: repeat(1, minmax(0, 1fr))
+            }
+        }
+
+        .card {
+            padding: 18px;
+            border-radius: var(--radius-sm);
+            background: rgba(14, 19, 35, .7);
+            border: 1px solid rgba(255, 255, 255, .07)
+        }
+
+        .card h3 {
+            margin: 0 0 6px;
+            font-size: clamp(18px, 2vw, 22px)
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .14);
+            background: rgba(255, 255, 255, .06);
+            font-weight: 650;
+            font-size: 13px;
+        }
+
+        .kpis {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px
+        }
+
+        @media (max-width: 960px) {
+            .kpis {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+        }
+
+        .kpi {
+            padding: 18px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, .1);
+            background: rgba(12, 16, 30, .7)
+        }
+
+        .kpi .num {
+            font-size: clamp(26px, 5vw, 40px);
+            font-weight: 800
+        }
+
+        .kpi .num small {
+            font-weight: 700;
+            font-size: .6em;
+            color: #cde0ff
+        }
+
+        .how .step {
+            display: flex;
+            gap: 12px
+        }
+
+        .how .glyph {
+            flex: 0 0 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            background: linear-gradient(135deg, rgba(90, 177, 255, .2), rgba(138, 91, 255, .2));
+            border: 1px solid rgba(255, 255, 255, .12)
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: var(--radius-sm);
+            overflow: hidden
+        }
+
+        .table thead th {
+            background: rgba(255, 255, 255, .06);
+            text-align: left;
+            padding: 12px;
+            font-size: 14px
+        }
+
+        .table td {
+            padding: 12px;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            color: #d8e4ff
+        }
+
+        .plan {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: 1.2fr .8fr;
+            align-items: start;
+        }
+
+        @media (max-width: 960px) {
+            .plan {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .price-card {
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: var(--radius);
+            background: rgba(14, 19, 35, .66)
+        }
+
+        .faq details {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .10);
+            border-radius: var(--radius-xs);
+            padding: 12px 14px
+        }
+
+        .faq summary {
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        footer {
+            padding: 32px 0 60px;
+            color: #a9b6cf
+        }
+
+        .ribbon {
+            position: fixed;
+            bottom: 14px;
+            right: 14px;
+            z-index: 60;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(90, 177, 255, .16), rgba(138, 91, 255, .16));
+            border: 1px solid rgba(255, 255, 255, .16);
+            border-radius: 999px;
+            padding: 8px 10px;
+            backdrop-filter: blur(8px)
+        }
+
+        .ribbon .cta {
+            padding: 10px 14px
+        }
+
+        .legal {
+            font-size: 12px;
+            color: #97a6c3
+        }
+
+        .footlinks {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap
+        }
+
+        /* accessibility */
+        :focus-visible {
+            outline: none;
+            box-shadow: var(--ring)
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-999px;opacity:0">Skip to content</a>
+    <header class="site">
+        <div class="site-inner container">
+            <div class="brand">
+                <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                            <stop offset="0" stop-color="#5ab1ff" />
+                            <stop offset="1" stop-color="#8a5bff" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="4" y="4" width="32" height="32" rx="8" fill="url(#g)" opacity=".25"></rect>
+                    <path d="M20 9l9 22h-3.6l-2.2-5.4h-6.4L14.6 31H11l9-22zm0 6.6-2.4 5.8h4.8L20 15.6z" fill="url(#g)">
+                    </path>
+                </svg>
+                AI Compass
+            </div>
+            <nav style="margin-left:auto">
+                <ul>
+                    <li><a href="#solution">Product</a></li>
+                    <li><a href="#how">How it works</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#metrics">Numbers</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <a class="cta" href="#pilot" aria-label="Start 30-day pilot">Start 30‑day Pilot</a>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- HERO -->
+        <section class="hero container stack">
+            <span class="eyebrow"><span class="dot"></span> Built for no cure · no pay teams</span>
+            <h1>Stop prospecting. <span style="color:var(--accent)">Start placing.</span></h1>
+            <p class="lede">Turn hiring chaos into a 24/7 growth engine. AI Compass automates HR prospecting, ranks
+                accounts by <strong>Hiring Momentum</strong>, matches candidates with roles, and powers personalized
+                outreach — all with verified data and credit‑based control.</p>
+            <div class="actions">
+                <a class="cta" href="#pilot">Start Pilot</a>
+                <a class="cta secondary" href="#demo">See Live Demo</a>
+            </div>
+            <div class="panel strip"><small>Automation + AI + Verified Data · Contact previews · Credit‑based unlocks ·
+                    Real‑time dashboard</small></div>
+        </section>
+
+        <!-- PROBLEM -->
+        <section id="problem" class="problem container stack">
+            <h2 class="section-title">The current challenge</h2>
+            <p class="muted">In a no cure · no pay model, minutes matter. Teams spend more time <em>finding</em> hiring
+                companies and decision‑makers than actually selecting candidates. AI Compass replaces the manual grind
+                with an automated, intelligent, and measurable flow that detects real opportunities in real time and
+                turns them into clients and placements.</p>
+            <div class="grid cols-3">
+                <div class="card">
+                    <h3>Manual sourcing drag</h3>
+                    <p class="muted">Hours lost scanning platforms, cleaning data, and mapping orgs.</p>
+                </div>
+                <div class="card">
+                    <h3>Low hit‑rate</h3>
+                    <p class="muted">Conversations start late and unfocused; the hottest accounts go cold.</p>
+                </div>
+                <div class="card">
+                    <h3>No visibility</h3>
+                    <p class="muted">Scattered tools and spreadsheets make measuring ROI difficult.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOLUTION -->
+        <section id="solution" class="solution container stack">
+            <h2 class="section-title">One system, two outcomes</h2>
+            <div class="grid cols-2">
+                <div class="card">
+                    <span class="badge">Service 1 — HR Prospecting &amp; Matching</span>
+                    <h3 style="margin-top:8px">Know who’s hiring <em>today</em> and who to talk to</h3>
+                    <p class="muted">We scrape and classify job offers daily, enrich companies selectively, preview
+                        decision‑makers, and score accounts by Hiring Momentum so you focus on the ones most likely to
+                        convert.</p>
+                </div>
+                <div class="card">
+                    <span class="badge">Service 2 — Candidate Prospecting &amp; Matching</span>
+                    <h3 style="margin-top:8px">Activate the right candidates in hours</h3>
+                    <p class="muted">AI builds smart queries, ranks profiles by a Candidate Fit Score, enriches top
+                        prospects, and launches compliant outreach with tracking and opt‑in capture.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section id="how" class="how container stack">
+            <h2 class="section-title">How it works</h2>
+            <div class="grid cols-2">
+                <div class="card step">
+                    <div class="glyph">1</div>
+                    <div>
+                        <h3>Daily job offer scraping</h3>
+                        <p class="muted">Scan major platforms, clean, and classify by country, sector, language,
+                            seniority, and type.</p>
+                    </div>
+                </div>
+                <div class="card step">
+                    <div class="glyph">2</div>
+                    <div>
+                        <h3>Intelligent organization</h3>
+                        <p class="muted">De‑dupe, structure by company/role/date, and extract skills &amp; requirements
+                            with AI.</p>
+                    </div>
+                </div>
+                <div class="card step">
+                    <div class="glyph">3</div>
+                    <div>
+                        <h3>Selective enrichment</h3>
+                        <p class="muted">Size, sector, tech stack, location, activity level, and key HR/leadership
+                            contacts.</p>
+                    </div>
+                </div>
+                <div class="card step">
+                    <div class="glyph">4</div>
+                    <div>
+                        <h3>Decision‑maker preview</h3>
+                        <p class="muted">See potential contacts without revealing details; unlock only when needed via
+                            credits.</p>
+                    </div>
+                </div>
+                <div class="card step">
+                    <div class="glyph">5</div>
+                    <div>
+                        <h3>Automatic prioritization</h3>
+                        <p class="muted">Each company gets a <strong>Hiring Momentum Score</strong> to focus on the
+                            highest potential.</p>
+                    </div>
+                </div>
+                <div class="card step">
+                    <div class="glyph">6</div>
+                    <div>
+                        <h3>Intelligent profile tagging</h3>
+                        <p class="muted">Bots tag roles (e.g., marketing, engineering) &amp; skills so jobs are ready
+                            for matching.</p>
+                    </div>
+                </div>
+                <div class="card step">
+                    <div class="glyph">7</div>
+                    <div>
+                        <h3>Matching &amp; automated outreach</h3>
+                        <p class="muted">Suggest compatible candidates and trigger personalized, trackable
+                            communication.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENEFITS -->
+        <section id="benefits" class="benefits container stack">
+            <h2 class="section-title">What you get</h2>
+            <div class="grid cols-3">
+                <div class="card">
+                    <h3>Full sourcing automation</h3>
+                    <p class="muted">Save dozens of hours every week.</p>
+                </div>
+                <div class="card">
+                    <h3>Verified &amp; updated data</h3>
+                    <p class="muted">Decide with confidence and fewer errors.</p>
+                </div>
+                <div class="card">
+                    <h3>Smart prioritization</h3>
+                    <p class="muted">Go first to the companies most likely to hire.</p>
+                </div>
+                <div class="card">
+                    <h3>Credit‑based control</h3>
+                    <p class="muted">Unlock only the contacts you need, when you need them.</p>
+                </div>
+                <div class="card">
+                    <h3>Instant candidate matching</h3>
+                    <p class="muted">Generate proposals faster and win more placements.</p>
+                </div>
+                <div class="card">
+                    <h3>Real‑time measurement</h3>
+                    <p class="muted">Dashboards for activity, replies, and conversions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- METRICS -->
+        <section id="metrics" class="metrics container stack">
+            <h2 class="section-title">Numbers that move the needle</h2>
+            <p class="muted">Base plan — <strong>1,000 credits / month</strong> (renews monthly and scales with demand).
+            </p>
+            <div class="kpis">
+                <div class="kpi">
+                    <div class="num"><span class="counter" data-value="600">0</span><small> companies</small></div>
+                    <div class="muted">enriched/month with full firmographics</div>
+                </div>
+                <div class="kpi">
+                    <div class="num"><span class="counter" data-value="500">0</span><small> contacts</small></div>
+                    <div class="muted">verified decision‑makers</div>
+                </div>
+                <div class="kpi">
+                    <div class="num"><span class="counter" data-value="50000">0</span><small> offers</small></div>
+                    <div class="muted">analyzed &amp; classified by AI</div>
+                </div>
+                <div class="kpi">
+                    <div class="num"><span class="counter" data-value="10">0</span><small> shortlist</small></div>
+                    <div class="muted">final candidates per role</div>
+                </div>
+            </div>
+            <p class="legal">Figures reflect typical ranges in the base plan. Actual volumes vary by market and
+                configuration.</p>
+        </section>
+
+        <!-- SERVICES DEEP DIVE -->
+        <section id="services" class="services container stack">
+            <h2 class="section-title">Deep dive</h2>
+            <div class="grid cols-2">
+                <div class="card">
+                    <h3>Service 1 — HR Prospecting &amp; Matching</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Capability</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Live market radar</td>
+                                <td>See who’s hiring today, by relevance.</td>
+                            </tr>
+                            <tr>
+                                <td>Hiring Momentum Score</td>
+                                <td>Prioritize accounts most likely to convert.</td>
+                            </tr>
+                            <tr>
+                                <td>Contact previews</td>
+                                <td>Unlock details with credits only when needed.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card">
+                    <h3>Service 2 — Candidate Prospecting &amp; Matching</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Capability</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Automated search</td>
+                                <td>Hundreds of aligned profiles per role — fast.</td>
+                            </tr>
+                            <tr>
+                                <td>Candidate Fit Score (0–100)</td>
+                                <td>Rank by true compatibility.</td>
+                            </tr>
+                            <tr>
+                                <td>Automated outreach &amp; consent</td>
+                                <td>Personalized flows with tracking and GDPR‑friendly opt‑in.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING / PILOT -->
+        <section id="pricing" class="pricing container stack">
+            <h2 class="section-title">Start smart with a 30‑day pilot</h2>
+            <div class="plan">
+                <div class="card">
+                    <h3>What’s included</h3>
+                    <ul class="muted">
+                        <li>Live view of companies actively hiring + decision‑maker previews</li>
+                        <li>Custom calibration of scraping, scoring, and outreach parameters</li>
+                        <li>Dashboard access for activity, replies, and conversions</li>
+                        <li>Defined success KPIs &amp; weekly check‑ins</li>
+                    </ul>
+                    <p class="muted">After the pilot, scale to full coverage with adjustable credit packs. Pricing
+                        depends on markets and volumes.</p>
+                </div>
+                <div class="price-card">
+                    <div class="badge">Base Plan</div>
+                    <h3 style="margin:.6em 0">1,000 credits / month</h3>
+                    <ul class="muted">
+                        <li>500–600 enriched companies</li>
+                        <li>400–500 verified contacts</li>
+                        <li>50k–100k offers analyzed by AI</li>
+                        <li>Shortlists of top 5–10 candidates/role</li>
+                    </ul>
+                    <div class="actions" style="margin-top:8px">
+                        <a class="cta" id="pilot"
+                            href="mailto:sales@yourdomain.com?subject=AI%20Compass%20Pilot&body=Hi%20AI%20Compass%20team%2C%0D%0A%0D%0AWe%27d%20like%20to%20start%20a%2030-day%20pilot.%20Please%20reach%20out%20with%20next%20steps.%0D%0A">Start
+                            Pilot</a>
+                        <a class="cta secondary" id="demo"
+                            href="mailto:sales@yourdomain.com?subject=AI%20Compass%20Demo">Request a demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="faq container stack">
+            <h2 class="section-title">FAQs</h2>
+            <div class="grid cols-2">
+                <details open>
+                    <summary>What does “credit‑based unlocks” mean?</summary>
+                    <p class="muted">You control spend by choosing when to reveal contact details. Previews show likely
+                        decision‑makers; unlocking consumes credits only on value.</p>
+                </details>
+                <details>
+                    <summary>Where do you source the data?</summary>
+                    <p class="muted">From major job platforms and professional sources, plus our enrichment layer for
+                        firmographics, tech stack, and activity signals.</p>
+                </details>
+                <details>
+                    <summary>How do Hiring Momentum and Candidate Fit work?</summary>
+                    <p class="muted">Hiring Momentum blends posting frequency, growth signals, and recency. Candidate
+                        Fit (0–100) maps skills, seniority, language, and relevance to the role.</p>
+                </details>
+                <details>
+                    <summary>Are you GDPR compliant?</summary>
+                    <p class="muted">Yes. Outreach flows include opt‑in collection, consent tracking, and retention
+                        controls.</p>
+                </details>
+                <details>
+                    <summary>Can we start small?</summary>
+                    <p class="muted">Yes — the 30‑day pilot validates quality, speed, and conversion before scaling.</p>
+                </details>
+                <details>
+                    <summary>Do you integrate with our stack?</summary>
+                    <p class="muted">We export to common CRMs/ATSs and can tailor delivery to your workflow.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="cta-final container stack" style="text-align:center">
+            <h2 class="section-title">Ready to act where real opportunity exists?</h2>
+            <p class="muted">Implement the 30‑day pilot → evaluate metrics → scale to full coverage.</p>
+            <div class="actions" style="justify-content:center">
+                <a class="cta" href="mailto:sales@yourdomain.com?subject=AI%20Compass%20Pilot">Start 30‑day Pilot</a>
+                <a class="cta secondary" href="mailto:sales@yourdomain.com?subject=AI%20Compass%20Questions">Talk to an
+                    expert</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container stack">
+        <div class="footlinks">
+            <span class="badge" title="Security & Privacy">GDPR‑friendly</span>
+            <span class="badge" title="Transparency">Credit‑based</span>
+            <span class="badge" title="Always on">24/7 automation</span>
+        </div>
+        <div class="legal">© <span id="year"></span> AI Compass. All rights reserved.</div>
+    </footer>
+
+    <div class="ribbon" aria-hidden="true">
+        <span>See it in action</span>
+        <a class="cta" href="#demo">Get a demo</a>
+    </div>
+
+    <script>
+        // Smooth anchor scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const id = a.getAttribute('href').slice(1);
+                const target = document.getElementById(id);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    history.pushState(null, '', '#' + id);
+                }
+            });
+        });
+
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const value = +el.dataset.value;
+                        const duration = 1000;
+                        const start = performance.now();
+                        const format = (n) => n >= 1000 ? (Math.round(n / 100) / 10).toFixed(1) + 'k' : n.toLocaleString();
+                        function tick(now) {
+                            const t = Math.min(1, (now - start) / duration);
+                            const eased = 1 - Math.pow(1 - t, 3);
+                            el.textContent = format(Math.floor(eased * value));
+                            if (t < 1) requestAnimationFrame(tick);
+                        }
+                        requestAnimationFrame(tick);
+                        io.unobserve(el);
+                    }
+                });
+            }, { threshold: .35 });
+            counters.forEach(c => io.observe(c));
+        } else {
+            counters.forEach(c => c.textContent = c.dataset.value);
+        }
+
+        // Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "AI Compass — HR & Candidate Prospecting & Matching",
+    "description": "Automation + AI + verified data to detect active hiring, prioritize accounts, match candidates, and automate outreach.",
+    "brand": {"@type": "Brand", "name": "AI Compass"},
+    "offers": {"@type": "AggregateOffer", "priceCurrency": "USD", "lowPrice": "Custom", "highPrice": "Custom", "offerCount": "1"}
+  }
+  </script>
+</body>
+
+</html>
