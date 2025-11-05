@@ -75,13 +75,20 @@
         }
 
         header.site {
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 50;
-            backdrop-filter: blur(10px);
-            background: rgba(5, 7, 13, .5);
-            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            width: 100%;
+            z-index: 999;
+            background: rgba(5, 7, 13, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        body {
+            padding-top: 70px;
+            /* evita que el contenido quede debajo de la barra */
+        }
+
 
         .site-inner {
             display: flex;
@@ -448,18 +455,7 @@
     <header class="site">
         <div class="site-inner container">
             <div class="brand">
-                <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
-                    <defs>
-                        <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-                            <stop offset="0" stop-color="#5ab1ff" />
-                            <stop offset="1" stop-color="#8a5bff" />
-                        </linearGradient>
-                    </defs>
-                    <rect x="4" y="4" width="32" height="32" rx="8" fill="url(#g)" opacity=".25"></rect>
-                    <path d="M20 9l9 22h-3.6l-2.2-5.4h-6.4L14.6 31H11l9-22zm0 6.6-2.4 5.8h4.8L20 15.6z" fill="url(#g)">
-                    </path>
-                </svg>
-                AI Compass
+                <img src="assets/logo-ai-compass.png" alt="AI Compass Logo" style="height:48px; width:auto;" />
             </div>
             <nav style="margin-left:auto">
                 <ul>
@@ -471,7 +467,10 @@
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
             </nav>
-            <a class="cta" href="#pilot" aria-label="Start 30-day pilot">Start 30‑day Pilot</a>
+            <a class="cta" href="https://calendly.com/thierry_moubax/ai-consultation-call?month=2025-11" target="_blank"
+                rel="noopener noreferrer">
+                Schedule a Strategy Session
+            </a>
         </div>
     </header>
 
@@ -484,8 +483,10 @@
                 accounts by <strong>Hiring Momentum</strong>, matches candidates with roles, and powers personalized
                 outreach — all with verified data and credit‑based control.</p>
             <div class="actions">
-                <a class="cta" href="#pilot">Start Pilot</a>
-                <a class="cta secondary" href="#demo">See Live Demo</a>
+                <a class="cta" href="#pilot">Validate the Concept Together</a>
+                <a class="cta secondary" href="https://calendly.com/thierry_moubax/ai-consultation-call?month=2025-11"
+                    target="_blank" rel="noopener noreferrer">Schedule a Strategy
+                    Session</a>
             </div>
             <div class="panel strip"><small>Automation + AI + Verified Data · Contact previews · Credit‑based unlocks ·
                     Real‑time dashboard</small></div>
@@ -519,14 +520,14 @@
             <h2 class="section-title">One system, two outcomes</h2>
             <div class="grid cols-2">
                 <div class="card">
-                    <span class="badge">Service 1 — HR Prospecting &amp; Matching</span>
+                    <span class="badge">Engine 1 — HR Prospecting &amp; Matching</span>
                     <h3 style="margin-top:8px">Know who’s hiring <em>today</em> and who to talk to</h3>
                     <p class="muted">We scrape and classify job offers daily, enrich companies selectively, preview
                         decision‑makers, and score accounts by Hiring Momentum so you focus on the ones most likely to
                         convert.</p>
                 </div>
                 <div class="card">
-                    <span class="badge">Service 2 — Candidate Prospecting &amp; Matching</span>
+                    <span class="badge">Engine 2 — Candidate Prospecting &amp; Matching</span>
                     <h3 style="margin-top:8px">Activate the right candidates in hours</h3>
                     <p class="muted">AI builds smart queries, ranks profiles by a Candidate Fit Score, enriches top
                         prospects, and launches compliant outreach with tracking and opt‑in capture.</p>
@@ -635,11 +636,11 @@
             </p>
             <div class="kpis">
                 <div class="kpi">
-                    <div class="num"><span class="counter" data-value="600">0</span><small> companies</small></div>
+                    <div class="num"><span class="counter" data-value="400">0</span><small> companies</small></div>
                     <div class="muted">enriched/month with full firmographics</div>
                 </div>
                 <div class="kpi">
-                    <div class="num"><span class="counter" data-value="500">0</span><small> contacts</small></div>
+                    <div class="num"><span class="counter" data-value="300">0</span><small> contacts</small></div>
                     <div class="muted">verified decision‑makers</div>
                 </div>
                 <div class="kpi">
@@ -660,7 +661,7 @@
             <h2 class="section-title">Deep dive</h2>
             <div class="grid cols-2">
                 <div class="card">
-                    <h3>Service 1 — HR Prospecting &amp; Matching</h3>
+                    <h3>Engine 1 — HR Prospecting &amp; Matching</h3>
                     <table class="table">
                         <thead>
                             <tr>
@@ -685,7 +686,7 @@
                     </table>
                 </div>
                 <div class="card">
-                    <h3>Service 2 — Candidate Prospecting &amp; Matching</h3>
+                    <h3>Engine 2 — Candidate Prospecting &amp; Matching</h3>
                     <table class="table">
                         <thead>
                             <tr>
@@ -738,10 +739,10 @@
                     </ul>
                     <div class="actions" style="margin-top:8px">
                         <a class="cta" id="pilot"
-                            href="mailto:sales@yourdomain.com?subject=AI%20Compass%20Pilot&body=Hi%20AI%20Compass%20team%2C%0D%0A%0D%0AWe%27d%20like%20to%20start%20a%2030-day%20pilot.%20Please%20reach%20out%20with%20next%20steps.%0D%0A">Start
+                            href="mailto:thierry@aicompass.ai?subject=AI%20Compass%20Pilot&body=Hi%20AI%20Compass%20team%2C%0D%0A%0D%0AWe%27d%20like%20to%20start%20a%2030-day%20pilot.%20Please%20reach%20out%20with%20next%20steps.%0D%0A">Start
                             Pilot</a>
                         <a class="cta secondary" id="demo"
-                            href="mailto:sales@yourdomain.com?subject=AI%20Compass%20Demo">Request a demo</a>
+                            href="mailto:thierry@aicompass.ai?subject=AI%20Compass%20Demo">Request a demo</a>
                     </div>
                 </div>
             </div>
@@ -787,9 +788,12 @@
             <h2 class="section-title">Ready to act where real opportunity exists?</h2>
             <p class="muted">Implement the 30‑day pilot → evaluate metrics → scale to full coverage.</p>
             <div class="actions" style="justify-content:center">
-                <a class="cta" href="mailto:sales@yourdomain.com?subject=AI%20Compass%20Pilot">Start 30‑day Pilot</a>
-                <a class="cta secondary" href="mailto:sales@yourdomain.com?subject=AI%20Compass%20Questions">Talk to an
-                    expert</a>
+                <a class="cta" href="https://calendly.com/thierry_moubax/ai-consultation-call?month=2025-11"
+                    target="_blank" rel="noopener noreferrer">
+                    Schedule a Strategy Session
+                </a>
+                <a class="cta secondary" href="mailto:thierry@aicompass.ai?subject=AI%20Compass%20Questions">Let’s Talk
+                    Next Steps</a>
             </div>
         </section>
     </main>
@@ -804,8 +808,8 @@
     </footer>
 
     <div class="ribbon" aria-hidden="true">
-        <span>See it in action</span>
-        <a class="cta" href="#demo">Get a demo</a>
+        <span>Implementation Plan</span>
+        <a class="cta" href="mailto:thierry@aicompass.ai?subject=AI%20Compass%20Questions">Let’s Talk</a>
     </div>
 
     <script>
