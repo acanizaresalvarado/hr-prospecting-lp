@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR Prospecting & Matching - Comprehensive Proposal</title>
+
+    <!-- Meta SEO / OG -->
+    <meta name="description"
+        content="AI Compass HR Prospecting Engine Proposal — Scraping, Enrichment, Outreach, KPIs, and Cost Model." />
+    <meta property="og:title" content="HR Prospecting & Matching - Proposal" />
+    <meta property="og:description" content="Technical architecture, costs and roadmap (30/60/90 days)." />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#1D4ED8" />
+    <link rel="icon" href="https://aicompass.pro/favicon.ico" />
+
+    <!-- Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script defer src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script defer src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Basic security (safe for Streamlit embed) -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src * data:; script-src 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com;">
+
+    <style>
+        :root {
+            --color-primary: #1D4ED8;
+            --color-accent: #0D9488;
+        }
+
+        .text-primary {
+            color: var(--color-primary);
+        }
+
+        .bg-primary {
+            background-color: var(--color-primary);
+        }
+
+        .border-accent {
+            border-color: var(--color-accent);
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        .bg-accent {
+            background-color: var(--color-accent);
+        }
+
+        .shadow-accent-hover:hover {
+            box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.5),
+                0 4px 6px -2px rgba(13, 148, 136, 0.05);
+        }
+
+        /* Flow diagram */
+        .flow-step {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .flow-arrow {
+            position: relative;
+            height: 10px;
+            width: 100%;
+            background-color: #E5E7EB;
+            margin: 0 auto;
+        }
+
+        .flow-arrow:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 10px solid #E5E7EB;
+        }
+
+        /* Hide scrollbar but keep scroll */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Fixed index */
+        #index-nav a:hover {
+            background-color: #DBEAFE;
+            color: var(--color-primary);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Accessibility: focus states */
+        #index-nav a:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        /* Print-friendly */
+        @media print {
+
+            header,
+            #index-nav,
+            footer {
+                display: none;
+            }
+
+            main {
+                padding: 0;
+            }
+
+            .shadow-lg,
+            .shadow-xl {
+                box-shadow: none;
+            }
+
+            a[href]:after {
+                content: "";
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 antialiased">
+    <a href="#resumen"
+        class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white rounded px-3 py-2 shadow">
+        Skip to content
+    </a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-20 bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-primary flex items-center">
+                <i data-lucide="compass" class="w-6 h-6 sm:w-8 sm:h-8 mr-2 text-accent" aria-hidden="true"></i>
+                AI Compass: HR Prospecting
+            </h1>
+            <span class="text-sm font-medium text-gray-500 hidden sm:block">Version: 2025-11-05</span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto flex">
+
+        <!-- Sidebar index -->
+        <nav id="index-nav"
+            class="hidden lg:block sticky top-[80px] w-64 h-[calc(100vh-80px)] overflow-y-auto p-4 bg-white border-r border-gray-200">
+            <h3 class="font-bold text-gray-900 mb-3 uppercase tracking-wider text-sm">Critical Content</h3>
+            <ul class="space-y-1 text-sm">
+                <li><a href="#resumen" class="block p-2 rounded-lg transition text-gray-600">Executive Summary</a></li>
+                <li><a href="#arquitectura" class="block p-2 rounded-lg transition text-gray-600">Architecture &
+                        Objectives</a></li>
+                <li><a href="#pasos" class="block p-2 rounded-lg transition text-gray-600">Operational Flow (7
+                        Steps)</a></li>
+                <li><a href="#lusha" class="block p-2 rounded-lg transition text-gray-600">Lusha API & Costs</a></li>
+                <li><a href="#costes" class="block p-2 rounded-lg transition text-gray-600">Cost Model</a></li>
+                <li><a href="#kpis" class="block p-2 rounded-lg transition text-gray-600">KPIs & Risks</a></li>
+                <li><a href="#roadmap" class="block p-2 rounded-lg transition text-gray-600">Roadmap (30/60/90)</a></li>
+                <li class="pt-2 border-t mt-2">
+                    <h4 class="font-bold text-gray-900 mb-1 uppercase tracking-wider text-xs">Details</h4>
+                </li>
+                <li><a href="#modelo-datos" class="block p-2 rounded-lg transition text-gray-600">Data Model</a></li>
+                <li><a href="#crm" class="block p-2 rounded-lg transition text-gray-600">CRM vs Dedicated Frontend</a>
+                </li>
+                <li><a href="#compliance" class="block p-2 rounded-lg transition text-gray-600">Compliance</a></li>
+                <li><a href="#raci" class="block p-2 rounded-lg transition text-gray-600">RACI</a></li>
+            </ul>
+        </nav>
+        <!-- Proposal Content -->
+        <main class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 space-y-12">
+
+            <!-- Metadata -->
+            <section class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-primary">
+                <div class="flex flex-wrap gap-4 text-sm font-medium">
+                    <span class="p-2 bg-gray-100 rounded-lg"><i data-lucide="calendar"
+                            class="w-4 h-4 inline mr-1 text-gray-500"></i> <strong>Version:</strong> 2025-11-05</span>
+                    <span class="p-2 bg-gray-100 rounded-lg"><i data-lucide="user"
+                            class="w-4 h-4 inline mr-1 text-gray-500"></i> <strong>Owner:</strong> Alberto</span>
+                    <span class="p-2 bg-gray-100 rounded-lg"><i data-lucide="layers-3"
+                            class="w-4 h-4 inline mr-1 text-gray-500"></i> <strong>Stack:</strong> n8n · Apify · Lusha
+                        API · FastAPI · Postgres/pgvector · GoHighLevel · Metabase</span>
+                    <span class="p-2 bg-gray-100 rounded-lg"><i data-lucide="briefcase"
+                            class="w-4 h-4 inline mr-1 text-gray-500"></i> <strong>Client Model:</strong> No cure · no
+                        pay (Placement)</span>
+                </div>
+            </section>
+
+            <!-- 0. Executive Summary -->
+            <section id="resumen" class="scroll-mt-24 bg-white p-8 rounded-xl shadow-xl">
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-4 flex items-center">
+                    <i data-lucide="zap" class="w-7 h-7 mr-2 text-accent"></i>Executive Summary
+                </h2>
+                <div class="space-y-4 text-lg">
+                    <p>We will build an engine that **detects companies that are hiring**, **identifies the correct
+                        decision-makers**, **proposes candidates**, and **executes AI-driven outreach**, with end-to-end
+                        traceability and strict control over credit costs.</p>
+
+                    <div class="mt-6 p-5 border-l-4 border-accent bg-teal-50 rounded-lg">
+                        <h3 class="text-xl font-bold text-accent mb-2">Key Conclusion</h3>
+                        <p class="text-gray-700">Technically and economically feasible. Monthly base (50k job
+                            offers/month) **≈ $460** (without CRM), yielding ~ 900–1,100 enriched contacts/month at
+                            **$0.10–$0.12**/contact (email).</p>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-primary pt-4">Design Keys</h3>
+                    <ul class="list-disc list-inside space-y-2 pl-4 text-gray-700">
+                        <li><strong>Free Search, Pay for Enrichment:</strong> With Lusha API, *search* does not consume
+                            credits; only *enrich* (email/phone/firmographics). Optimizes TPC.</li>
+                        <li><strong>Low-code Orchestration (n8n):</strong> Reproducible, observable pipelines with
+                            credit *kill-switch*.</li>
+                        <li><strong>Aggressive Dedupe + Cache:</strong> Avoids duplicates and unnecessary spending
+                            (company TTL 30d, contact 14–30d).</li>
+                        <li><strong>Two‑Pass Reveal:</strong> Email first (1 credit); phone only for Tier A or after 2–3
+                            attempts.</li>
+                        <li><strong>Compliance by Design:</strong> GDPR (B2B legitimate interest), suppression, source
+                            traceability, opt‑out.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 1. Objectives & 2. High-Level Architecture -->
+            <section id="arquitectura" class="scroll-mt-24">
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-6 flex items-center">
+                    <i data-lucide="layout-grid" class="w-7 h-7 mr-2 text-primary"></i> Objectives & Architecture
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- 1. Objectives -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-primary">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">1. Objectives</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-gray-700"><i data-lucide="trending-up"
+                                    class="w-5 h-5 mr-2 mt-1 text-accent flex-shrink-0"></i> <strong>Companies:</strong>
+                                detect and prioritize accounts with high *Hiring Momentum*.</li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="user-check"
+                                    class="w-5 h-5 mr-2 mt-1 text-accent flex-shrink-0"></i>
+                                <strong>Decision-Makers:</strong> discover and enrich the correct profiles (TA/HR/Hiring
+                                Manager).
+                            </li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="clipboard-list"
+                                    class="w-5 h-5 mr-2 mt-1 text-accent flex-shrink-0"></i> <strong>Desired
+                                    Profiles:</strong> AI bot to organize and clean job offer info to gain clear
+                                *knowledge* of the profile the company is seeking.</li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="git-pull-request-draft"
+                                    class="w-5 h-5 mr-2 mt-1 text-accent flex-shrink-0"></i>
+                                <strong>Candidates:</strong> automatic matching (skills, seniority, language, location).
+                            </li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="mail-open"
+                                    class="w-5 h-5 mr-2 mt-1 text-accent flex-shrink-0"></i> <strong>Outreach:</strong>
+                                multi-channel sequences with personalized AI messages.</li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="gauge"
+                                    class="w-5 h-5 mr-2 mt-1 text-accent flex-shrink-0"></i>
+                                <strong>Measurement:</strong> Actionable KPIs, feedback loop for re‑rank and ROI.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 2. High-Level Architecture -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-primary">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">2. High-Level Architecture</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-gray-700"><i data-lucide="download"
+                                    class="w-5 h-5 mr-2 mt-1 text-primary flex-shrink-0"></i>
+                                <strong>Ingestion:</strong> LinkedIn Jobs + complementary via scraping tools → n8n.
+                            </li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="sparkles"
+                                    class="w-5 h-5 mr-2 mt-1 text-primary flex-shrink-0"></i>
+                                <strong>Normalization:</strong> cleaning + job_hash + AI extraction (must/nice skills,
+                                seniority, language, work mode).
+                            </li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="credit-card"
+                                    class="w-5 h-5 mr-2 mt-1 text-primary flex-shrink-0"></i>
+                                <strong>Enrichment:</strong> Lusha (Search→Enrich selective) + cache.
+                            </li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="database"
+                                    class="w-5 h-5 mr-2 mt-1 text-primary flex-shrink-0"></i> <strong>Storage:</strong>
+                                Postgres 16 + pgvector; S3/GCS for *raw* data and logs.</li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="shuffle"
+                                    class="w-5 h-5 mr-2 mt-1 text-primary flex-shrink-0"></i> <strong>Matching:</strong>
+                                rules + BM25 + embeddings (pgvector) + boosts.</li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="settings"
+                                    class="w-5 h-5 mr-2 mt-1 text-primary flex-shrink-0"></i>
+                                <strong>Orchestration:</strong> n8n (rate limit, retries, circuit breaker, cost‑guards).
+                            </li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="send"
+                                    class="w-5 h-5 mr-2 mt-1 text-primary flex-shrink-0"></i> <strong>Outreach:</strong>
+                                GoHighLevel CRM (pipelines) or integration with client's CRM.</li>
+                            <li class="flex items-start text-gray-700"><i data-lucide="area-chart"
+                                    class="w-5 h-5 mr-2 mt-1 text-primary flex-shrink-0"></i>
+                                <strong>BI/Observability:</strong> Metabase (dashboards), logs, and alerts.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. General View (7-Step Operational Flow) -->
+            <section id="pasos" class="scroll-mt-24">
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-6 flex items-center">
+                    <i data-lucide="workflow" class="w-7 h-7 mr-2 text-accent"></i> Operational Flow (7 Steps)
+                </h2>
+                <div class="bg-white p-6 rounded-xl shadow-xl space-y-4">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">3.1 General View</h3>
+                    <div class="grid md:grid-cols-7 gap-4 text-center items-stretch justify-center">
+                        <!-- Step 1 -->
+                        <div class="flow-step col-span-7 md:col-span-1 p-3 bg-indigo-50 rounded-lg">
+                            <i data-lucide="database-zap" class="w-6 h-6 mx-auto text-primary mb-1"></i>
+                            <span class="font-semibold text-sm">1. Scrape Offers</span>
+                        </div>
+                        <div class="hidden md:block flow-arrow col-span-1"></div>
+                        <!-- Step 2 -->
+                        <div class="flow-step col-span-7 md:col-span-1 p-3 bg-indigo-50 rounded-lg">
+                            <i data-lucide="scissors" class="w-6 h-6 mx-auto text-primary mb-1"></i>
+                            <span class="font-semibold text-sm">2. Normalize + Dedupe</span>
+                        </div>
+                        <div class="hidden md:block flow-arrow col-span-1"></div>
+                        <!-- Step 3 -->
+                        <div class="flow-step col-span-7 md:col-span-1 p-3 bg-indigo-50 rounded-lg">
+                            <i data-lucide="graduation-cap" class="w-6 h-6 mx-auto text-primary mb-1"></i>
+                            <span class="font-semibold text-sm">3. Classify (AI)</span>
+                        </div>
+                        <div class="hidden md:block flow-arrow col-span-1"></div>
+                        <!-- Step 4 -->
+                        <div class="flow-step col-span-7 md:col-span-1 p-3 bg-indigo-50 rounded-lg">
+                            <i data-lucide="building" class="w-6 h-6 mx-auto text-primary mb-1"></i>
+                            <span class="font-semibold text-sm">4. Company Enrich</span>
+                        </div>
+                        <div class="hidden md:block flow-arrow col-span-1"></div>
+                        <!-- Step 5 -->
+                        <div class="flow-step col-span-7 md:col-span-1 p-3 bg-indigo-50 rounded-lg">
+                            <i data-lucide="users" class="w-6 h-6 mx-auto text-primary mb-1"></i>
+                            <span class="font-semibold text-sm">5. Prospect Search (Free)</span>
+                        </div>
+                        <div class="hidden md:block flow-arrow col-span-1"></div>
+                        <!-- Step 6 -->
+                        <div class="flow-step col-span-7 md:col-span-1 p-3 bg-teal-50 rounded-lg">
+                            <i data-lucide="mail-plus" class="w-6 h-6 mx-auto text-accent mb-1"></i>
+                            <span class="font-semibold text-sm">6. Selective Enrich (Paid)</span>
+                        </div>
+                        <div class="hidden md:block flow-arrow col-span-1"></div>
+                        <!-- Step 7 -->
+                        <div class="flow-step col-span-7 md:col-span-1 p-3 bg-teal-50 rounded-lg">
+                            <i data-lucide="message-square" class="w-6 h-6 mx-auto text-accent mb-1"></i>
+                            <span class="font-semibold text-sm">7. Outreach + Feedback</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 space-y-4">
+                        <!-- 3.2 Step-by-Step (Operational) -->
+                        <details
+                            class="group bg-gray-50 p-4 rounded-lg cursor-pointer hover:bg-gray-100 transition duration-150">
+                            <summary class="flex justify-between items-center font-bold text-lg text-primary">
+                                3.2 Step-by-Step (Operational)
+                                <i data-lucide="chevron-down"
+                                    class="w-5 h-5 transition-transform duration-300 group-open:rotate-180"></i>
+                            </summary>
+                            <ul class="mt-3 space-y-2 text-gray-700 text-sm list-decimal list-inside pl-4">
+                                <li><strong>Scraping (Apify→n8n):</strong> execute actors; receive JSON; validate
+                                    schema; calculate job_hash; save to DB.</li>
+                                <li><strong>AI Classification:</strong> summarize description; extract
+                                    must/nice/language/seniority; normalize title; write to DB.</li>
+                                <li><strong>Company Enrichment:</strong> Lusha GET/POST /v2/company or
+                                    prospecting/company/enrich (TTL 30d).</li>
+                                <li><strong>Decision-Maker Search:</strong> prospecting/contact/search (filters:
+                                    dept/title/seniority/geo); save *pool* without PII.</li>
+                                <li><strong>Prioritization:</strong> *Hiring Momentum* + persona heuristic (TA vs Hiring
+                                    Manager) + geo/sector signal.</li>
+                                <li><strong>Selective Reveal (Paid):</strong> prospecting/contact/enrich (1
+                                    credit/email); phone (+5) only Tier A / escalation.</li>
+                                <li><strong>Outreach & CRM:</strong> generate AI copy; create/update in GHL; launch
+                                    sequences; record responses; feedback ranking.</li>
+                            </ul>
+                        </details>
+
+                        <!-- 3.3 Step Details (Technical + Decisions) -->
+                        <details
+                            class="group bg-gray-50 p-4 rounded-lg cursor-pointer hover:bg-gray-100 transition duration-150">
+                            <summary class="flex justify-between items-center font-bold text-lg text-primary">
+                                3.3 Step Details (Technical + Decisions)
+                                <i data-lucide="chevron-down"
+                                    class="w-5 h-5 transition-transform duration-300 group-open:rotate-180"></i>
+                            </summary>
+                            <div class="mt-3 space-y-4 text-sm text-gray-700">
+                                <h4 class="font-semibold text-gray-900">Step 1 — Scraping</h4>
+                                <ul class="list-disc list-inside pl-4">
+                                    <li>Primary source: LinkedIn Jobs via scraping; complements: Google Jobs, *careers*
+                                        pages, etc.</li>
+                                    <li>Apify variable cost: **$1.6/1,000 offers** + $30 base.</li>
+                                    <li>ToS Risk: use IP rotation, backoff, source diversification.</li>
+                                </ul>
+                                <h4 class="font-semibold text-gray-900">Step 2 — Normalization</h4>
+                                <ul class="list-disc list-inside pl-4">
+                                    <li>Clean HTML → description_plain.</li>
+                                    <li>Standard fields: title, location, work_type, contract, sector, salary, poster,
+                                        posted_at.</li>
+                                    <li>job_hash = hash(company_norm + title_norm + location + posted_at) for strong
+                                        dedupe.</li>
+                                </ul>
+                                <h4 class="font-semibold text-gray-900">Step 3 — AI Classification</h4>
+                                <ul class="list-disc list-inside pl-4">
+                                    <li>Extract skills_must[], skills_nice[], language, seniority, *work mode*.</li>
+                                    <li>Normalize titles to taxonomy.</li>
+                                    <li>Save *rationale* for copy (reasons for fit).</li>
+                                </ul>
+                                <h4 class="font-semibold text-gray-900">Step 4 — Company Enrich</h4>
+                                <ul class="list-disc list-inside pl-4">
+                                    <li>Paid: **1 credit/company**.</li>
+                                    <li>Endpoints: GET/POST /v2/company or prospecting/company/enrich.</li>
+                                    <li>Cache TTL 30 days; avoids repurchases by domain.</li>
+                                </ul>
+                                <h4 class="font-semibold text-gray-900">Step 5 — Prospect Search (Free)</h4>
+                                <ul class="list-disc list-inside pl-4">
+                                    <li>Endpoint: POST /prospecting/contact/search.</li>
+                                    <li>No cost: returns name/title/company/geo **without email/phone**.</li>
+                                    <li>Save to contact_candidates (reveal_status = none).</li>
+                                </ul>
+                                <h4 class="font-semibold text-gray-900">Step 6 — Selective Enrich (Paid)</h4>
+                                <ul class="list-disc list-inside pl-4">
+                                    <li>Contact: POST /prospecting/contact/enrich or GET/POST /v2/person (bulk) → **1
+                                        credit** per valid contact (email).</li>
+                                    <li>Direct phone (if available): **+5 credits**.</li>
+                                    <li>Policy: Two‑Pass (email→phone) + *kill‑switch* at 95% of credits.</li>
+                                </ul>
+                                <h4 class="font-semibold text-gray-900">Step 7 — Outreach + Feedback</h4>
+                                <ul class="list-disc list-inside pl-4">
+                                    <li>CRM for pipeline and sequences; SMTP provider for sending.</li>
+                                    <li>AI Copy with RAG (job summary + 3 reasons for fit + CTA).</li>
+                                    <li>Response webhooks → update outreach_events, recalibrate ranking weights, and
+                                        *persona-based copies*.</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Lusha API – Endpoints & Costs (Operational Reference) & 6. Cost Model -->
+            <section id="lusha" class="scroll-mt-24">
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-6 flex items-center">
+                    <i data-lucide="dollar-sign" class="w-7 h-7 mr-2 text-primary"></i> Lusha API & Cost Model
+                    (CRITICAL)
+                </h2>
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- 5. Lusha API -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-accent">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">5. Lusha API - Endpoints & Credits</h3>
+
+                        <div class="space-y-4 text-sm">
+                            <h4 class="font-semibold text-gray-800">Credits / Unit Prices</h4>
+                            <ul class="list-disc list-inside pl-4 text-gray-700 font-mono">
+                                <li>Verified Email: **1 credit** (~$0.10–$0.12)</li>
+                                <li>Direct Phone: **+5 credits** (~$0.50–$0.60)</li>
+                                <li>Enriched Company: **1 credit** (~$0.10–$0.12)</li>
+                            </ul>
+
+                            <h4 class="font-semibold text-gray-800 pt-2">Endpoint Details</h4>
+                            <table class="w-full text-left table-auto border-collapse border border-gray-200">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th class="p-2 border border-gray-300">Endpoint</th>
+                                        <th class="p-2 border border-gray-300">Credits</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="p-2 border border-gray-300">/prospecting/contact/search</td>
+                                        <td class="p-2 border border-gray-300 font-bold text-green-600">FREE (Pool
+                                            without PII)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 border border-gray-300">/prospecting/contact/enrich / /v2/person
+                                        </td>
+                                        <td class="p-2 border border-gray-300">1 credit</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 border border-gray-300">/prospecting/company/search</td>
+                                        <td class="p-2 border border-gray-300 font-bold text-green-600">FREE</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 border border-gray-300">/prospecting/company/enrich / /v2/company
+                                        </td>
+                                        <td class="p-2 border border-gray-300">1 credit</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 border border-gray-300">/api/signals/* (Optional)</td>
+                                        <td class="p-2 border border-gray-300">1 credit/event</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2">Lusha Plans: Free 40 cr; Pro 250 cr ($29.90);
+                                **Premium 1,000 cr ($114.35)**; Enterprise negotiated. Typical *Rate limits*: Free 25/d
+                                · Pro 2k/d · Premium 6k/d.</p>
+                        </div>
+                    </div>
+
+                    <!-- 6. Cost Model -->
+                    <div id="costes" class="scroll-mt-24 bg-white p-6 rounded-xl shadow-lg border-t-4 border-accent">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">6. Cost Model (Monthly)</h3>
+                        <p class="text-base text-gray-700 mb-4">Base assumption: Lusha Premium (1,000 cr: $114.35) and
+                            *Search→Filter→Enrich* policy (30–50% saving).</p>
+
+                        <div class="overflow-x-auto hide-scrollbar">
+                            <table class="min-w-full text-sm text-left border-collapse border border-gray-300">
+                                <thead class="bg-primary text-white">
+                                    <tr>
+                                        <th class="p-3 border border-indigo-700">Item</th>
+                                        <th class="p-3 border border-indigo-700">Low (10k offers)</th>
+                                        <th class="p-3 border border-indigo-700">Base (50k offers)</th>
+                                        <th class="p-3 border border-indigo-700">High (200k offers)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-gray-50">
+                                        <td class="p-3 border border-gray-300 font-semibold">Apify (base+var)</td>
+                                        <td class="p-3 border border-gray-300">$46</td>
+                                        <td class="p-3 border border-gray-300">$110</td>
+                                        <td class="p-3 border border-gray-300">$350</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-gray-300 font-semibold">Lusha (selective enrich)
+                                        </td>
+                                        <td class="p-3 border border-gray-300">$115</td>
+                                        <td class="p-3 border border-gray-300">$125</td>
+                                        <td class="p-3 border border-gray-300">$150</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="p-3 border border-gray-300 font-semibold">Email sending</td>
+                                        <td class="p-3 border border-gray-300">$15</td>
+                                        <td class="p-3 border border-gray-300">$30</td>
+                                        <td class="p-3 border border-gray-300">$60</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-gray-300 font-semibold">Domains + warm‑up</td>
+                                        <td class="p-3 border border-gray-300">$20</td>
+                                        <td class="p-3 border border-gray-300">$40</td>
+                                        <td class="p-3 border border-gray-300">$80</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="p-3 border border-gray-300 font-semibold">n8n (cloud/VPS)</td>
+                                        <td class="p-3 border border-gray-300">$20</td>
+                                        <td class="p-3 border border-gray-300">$40</td>
+                                        <td class="p-3 border border-gray-300">$80</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-gray-300 font-semibold">DB (Postgres)</td>
+                                        <td class="p-3 border border-gray-300">$25</td>
+                                        <td class="p-3 border border-gray-300">$40</td>
+                                        <td class="p-3 border border-gray-300">$80</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="p-3 border border-gray-300 font-semibold">Logs/monitor</td>
+                                        <td class="p-3 border border-gray-300">$0</td>
+                                        <td class="p-3 border border-gray-300">$15</td>
+                                        <td class="p-3 border border-gray-300">$30</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-gray-300 font-semibold">LLM (classif/copies)</td>
+                                        <td class="p-3 border border-gray-300">$15</td>
+                                        <td class="p-3 border border-gray-300">$40</td>
+                                        <td class="p-3 border border-gray-300">$75</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="p-3 border border-gray-300 font-semibold">Email verification</td>
+                                        <td class="p-3 border border-gray-300">$10</td>
+                                        <td class="p-3 border border-gray-300">$20</td>
+                                        <td class="p-3 border border-gray-300">$30</td>
+                                    </tr>
+                                    <tr class="bg-accent text-white font-extrabold">
+                                        <td class="p-3 border border-teal-700">Total Approx. (Excl. CRM)</td>
+                                        <td class="p-3 border border-teal-700">$266</td>
+                                        <td class="p-3 border border-teal-700">$460</td>
+                                        <td class="p-3 border border-teal-700">$935</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                            <h4 class="font-bold text-lg text-yellow-800">Unit Economics & Controls</h4>
+                            <p class="text-sm text-gray-700">Contact (email only): **~$0.10–$0.12** | Email+phone
+                                (select cases): **~$0.60–$0.72** | Scraped Offer: **$0.0016**.</p>
+                            <p class="text-xs text-red-600 mt-1">Controls: Alerts at 80% of credits, **kill‑switch at
+                                95%**, Two‑Pass Reveal, cache TTL, nightly *batch enrich*.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. KPIs & 10. Risks and Mitigations -->
+            <section id="kpis" class="scroll-mt-24">
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-6 flex items-center">
+                    <i data-lucide="shield-check" class="w-7 h-7 mr-2 text-primary"></i> KPIs & Risks
+                </h2>
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- 9. KPIs -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-green-600">
+                        <h3 class="text-2xl font-bold text-green-700 mb-4">7. KPIs (Success Measurement)</h3>
+                        <div class="space-y-3 text-sm text-gray-700">
+                            <p><strong>Ingestion:</strong> offers/day, dedupe %, latency, top sources.</p>
+                            <p><strong>Enrichment:</strong> company match rate, contact list rate (pre‑reveal),
+                                reveal‑to‑send %.</p>
+                            <p><strong>Outreach:</strong> reply %, meetings, offers, **placements**.</p>
+                            <p><strong>Quality:</strong> bounce %, spam %, P95 latencies, credits/day.</p>
+                            <p><strong>Business:</strong> CPA per account/placement, time‑to‑first‑reply,
+                                revenue/placement.</p>
+                        </div>
+                    </div>
+                    <!-- Risks & mitigations -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                        <h3 class="text-2xl font-bold text-red-700 mb-4">8. Risks & Mitigations</h3>
+                        <div class="space-y-3 text-sm text-gray-700">
+                            <p><strong>Scraping blocks:</strong> alternative sources + backoff + proxies; consider
+                                agreements/licenses.</p>
+                            <p><strong>Credit overruns:</strong> **kill‑switch** + alerts + reveal in stages.</p>
+                            <p><strong>High bounces:</strong> selective verification; warm-up; A/B testing of copies.
+                            </p>
+                            <p><strong>Uneven coverage:</strong> plan B (Cognism/Dropcontact).</p>
+                            <p><strong>API changes:</strong> changelog subscription + contractual tests.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. Roadmap 30/60/90 -->
+            <section id="roadmap" class="scroll-mt-24 bg-white p-8 rounded-xl shadow-xl">
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-6 flex items-center">
+                    <i data-lucide="rocket" class="w-7 h-7 mr-2 text-accent"></i>Roadmap (30/60/90)
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="p-4 rounded-lg bg-indigo-50 border-t-4 border-indigo-700">
+                        <h3 class="text-xl font-bold text-indigo-700 mb-2">Days 1–30 (MVP)</h3>
+                        <ul class="list-disc list-inside text-sm text-gray-700 text-left pl-2 space-y-1">
+                            <li>DB + Apify pipelines; normalizer + AI extraction; dedupe.</li>
+                            <li>Lusha (Company + Prospecting Search); cache; logs; minimal dashboard.</li>
+                            <li>Matching MVP; basic sequences in GHL.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 rounded-lg bg-teal-50 border-t-4 border-teal-700">
+                        <h3 class="text-xl font-bold text-teal-700 mb-2">Days 31–60 (Quality + Scale)</h3>
+                        <ul class="list-disc list-inside text-sm text-gray-700 text-left pl-2 space-y-1">
+                            <li>Selective Reveal (Two‑Pass); CRM→ranking feedback.</li>
+                            <li>New job sources; AI templates (RAG 3 reasons); alerts/credits.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 rounded-lg bg-yellow-50 border-t-4 border-yellow-700">
+                        <h3 class="text-xl font-bold text-yellow-700 mb-2">Days 61–90 (Optimization)</h3>
+                        <ul class="list-disc list-inside text-sm text-gray-700 text-left pl-2 space-y-1">
+                            <li>Supervised Re‑rank (XGBoost) with real signals.</li>
+                            <li>*Hiring Momentum Score* in UI + rules; A/B testing of copies; account panel; credit
+                                saturation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Sections (4, 7, 8, 12) -->
+            <section class="space-y-6">
+                <h2 class="text-2xl font-extrabold text-gray-900 pt-4 border-t border-gray-200">Additional Details</h2>
+
+                <!-- Data Model -->
+                <details id="modelo-datos"
+                    class="scroll-mt-24 group bg-white p-6 rounded-xl shadow-lg border-l-4 border-gray-300">
+                    <summary class="flex justify-between items-center font-bold text-xl text-gray-900 cursor-pointer">
+                        Data Model (Useful Summary)
+                        <i data-lucide="plus"
+                            class="w-5 h-5 transition-transform duration-300 group-open:rotate-45"></i>
+                    </summary>
+                    <div class="mt-4 space-y-3 text-sm text-gray-700">
+                        <p><strong>companies:</strong> id, legal_name, domain (unique), linkedin_url, industry,
+                            size_band, HQ, revenue, tech_stack, last_enriched_at.</p>
+                        <p><strong>jobs:</strong> id, company_id, title_raw/normalized, description_raw,
+                            skills_must/nice, seniority, work_mode, geo, salary, posted_at, source, job_hash (unique).
+                        </p>
+                        <p><strong>contact_candidates (pre‑reveal):</strong> id, company_id, lusha_id, name, title,
+                            dept, seniority, linkedin_url, geo, reveal_status, found_at.</p>
+                        <p><strong>contacts (post‑reveal):</strong> id, company_id, email, phone, email_status,
+                            phone_type, reveal_at, source.</p>
+                        <p><strong>candidates:</strong> id, email, location, skills[], seniority, availability,
+                            cv_vector, consent_status.</p>
+                        <p><strong>match_scores:</strong> id, job_id, candidate_id, score_total, breakdown, matched_at.
+                        </p>
+                        <p><strong>outreach_events:</strong> id, entity_type, entity_id, channel, template_id, status,
+                            sent_at, reply_at.</p>
+                        <p><strong>etl_audit:</strong> runs, errors, latencies, rows.</p>
+                    </div>
+                </details>
+
+                <!-- CRM vs Dedicated Frontend -->
+                <details id="crm"
+                    class="scroll-mt-24 group bg-white p-6 rounded-xl shadow-lg border-l-4 border-gray-300">
+                    <summary class="flex justify-between items-center font-bold text-xl text-gray-900 cursor-pointer">
+                        CRM vs Dedicated Frontend
+                        <i data-lucide="plus"
+                            class="w-5 h-5 transition-transform duration-300 group-open:rotate-45"></i>
+                    </summary>
+                    <div class="mt-4 space-y-2 text-sm text-gray-700">
+                        <p><strong>GHL as CRM:</strong> Will be used for *outreach*, *pipelines*, and sequences.</p>
+                        <p><strong>Dedicated Dashboard (Next.js/Metabase):</strong> For visualization of companies,
+                            vacancies, *matches*, credit consumption, *Hiring Momentum*, KPIs.</p>
+                    </div>
+                </details>
+
+                <!-- Compliance & Deliverability -->
+                <details id="compliance"
+                    class="scroll-mt-24 group bg-white p-6 rounded-xl shadow-lg border-l-4 border-gray-300">
+                    <summary class="flex justify-between items-center font-bold text-xl text-gray-900 cursor-pointer">
+                        Compliance & Deliverability
+                        <i data-lucide="plus"
+                            class="w-5 h-5 transition-transform duration-300 group-open:rotate-45"></i>
+                    </summary>
+                    <div class="mt-4 space-y-3 text-sm text-gray-700">
+                        <p><strong>LinkedIn/ToS:</strong> human rhythm, IP rotation, backoff, source diversification.
+                        </p>
+                        <p><strong>GDPR:</strong> B2B legitimate interest (decision-makers); candidate consent for CV;
+                            *opt‑out*; record source (“Data from Lusha [date]”).</p>
+                        <p><strong>PII:</strong> log masking; retention; *forget‑me*; *suppression list*.</p>
+                        <p><strong>Email:</strong> warmed domains; SPF/DKIM/DMARC; Tier A verification.</p>
+                    </div>
+                </details>
+
+                <!-- RACI / Responsibilities -->
+                <details id="raci"
+                    class="scroll-mt-24 group bg-white p-6 rounded-xl shadow-lg border-l-4 border-gray-300">
+                    <summary class="flex justify-between items-center font-bold text-xl text-gray-900 cursor-pointer">
+                        RACI / Responsibilities
+                        <i data-lucide="plus"
+                            class="w-5 h-5 transition-transform duration-300 group-open:rotate-45"></i>
+                    </summary>
+                    <div class="mt-4 space-y-2 text-sm text-gray-700">
+                        <p><strong>Product:</strong> Alberto.</p>
+                        <p><strong>Data/ETL:</strong> AIC IT team (Apify + n8n pipelines).</p>
+                        <p><strong>Backend/DB:</strong> AIC IT team (FastAPI + Postgres/pgvector).</p>
+                        <p><strong>AI Prompts:</strong> Alberto (classification and copies).</p>
+                        <p><strong>CRM/Outreach:</strong> Alberto (GHL).</p>
+                        <p><strong>BI:</strong> AIC IT team (Metabase, KPIs, alerts).</p>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center py-6 border-t mt-12 text-gray-500 text-sm">
+                AI Compass Project Proposal. All rights reserved.
+            </footer>
+        </main>
+    </div>
+
+    <!-- Lucide init -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>
