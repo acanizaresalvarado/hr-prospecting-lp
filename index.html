@@ -9,7 +9,7 @@
         content="Turn hiring chaos into a 24/7 growth engine. AI Compass automates HR prospecting, prioritizes accounts by Hiring Momentum, matches candidates with roles, and powers outreach — all with verified data and credit-based control." />
     <meta property="og:title" content="AI Compass — HR & Candidate Prospecting & Matching" />
     <meta property="og:description"
-        content="Automate sourcing, identify who’s hiring today, get decision‑makers when you need them, and match candidates instantly. Start a 30‑day pilot." />
+        content="Automate sourcing, identify who’s hiring today, get decision-makers when you need them, and match candidates instantly. Start a 30-day pilot." />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#0B5FFF" />
     <link rel="icon" type="image/png" href="assets/favicon-ai-compass-2.png" />
@@ -53,6 +53,8 @@
             background-attachment: fixed;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            padding-top: 70px;
+            /* evita que el contenido quede bajo el header fijo */
         }
 
         a {
@@ -75,6 +77,7 @@
             gap: clamp(16px, 2.2vw, 28px)
         }
 
+        /* ===== HEADER (desktop por defecto) ===== */
         header.site {
             position: fixed;
             top: 0;
@@ -85,17 +88,13 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        body {
-            padding-top: 70px;
-            /* evita que el contenido quede debajo de la barra */
-        }
-
-
         .site-inner {
+            position: relative;
+            /* ancla el dropdown móvil a este contenedor */
             display: flex;
             align-items: center;
             gap: 16px;
-            padding: 12px var(--space)
+            padding: 12px var(--space);
         }
 
         .brand {
@@ -110,21 +109,45 @@
             flex: 0 0 auto
         }
 
-        nav ul {
+        header.site nav ul {
             display: flex;
             gap: 18px;
             list-style: none;
             margin: 0;
-            padding: 0
+            padding: 0;
         }
 
-        nav a {
+        /* ===== Desktop: alineación y aire en el header ===== */
+        @media (min-width: 769px) {
+            .site-inner>nav {
+                margin-left: auto;
+            }
+
+            header.site nav ul {
+                gap: 24px;
+            }
+
+            .site-inner .cta {
+                margin-left: 20px;
+                flex-shrink: 0;
+            }
+
+            .site-inner {
+                gap: 20px;
+            }
+
+            header.site nav a {
+                white-space: nowrap;
+            }
+        }
+
+        header.site nav a {
             color: #cfe0ff;
             font-weight: 550;
             opacity: .9
         }
 
-        nav a:hover {
+        header.site nav a:hover {
             opacity: 1
         }
 
@@ -157,8 +180,19 @@
             box-shadow: none
         }
 
+        /* botón hamburguesa oculto en desktop */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        /* ===== Layout general ===== */
         .hero {
-            padding: 64px 0 32px;
+            padding: 64px 0 32px
         }
 
         .hero h1 {
@@ -203,7 +237,7 @@
             background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
             border: 1px solid rgba(255, 255, 255, .10);
             border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-lg)
         }
 
         .strip {
@@ -259,7 +293,7 @@
             grid-template-columns: repeat(4, minmax(0, 1fr))
         }
 
-        @media (max-width: 960px) {
+        @media (max-width:960px) {
             .grid.cols-4 {
                 grid-template-columns: repeat(2, minmax(0, 1fr))
             }
@@ -298,7 +332,7 @@
             border: 1px solid rgba(255, 255, 255, .14);
             background: rgba(255, 255, 255, .06);
             font-weight: 650;
-            font-size: 13px;
+            font-size: 13px
         }
 
         .kpis {
@@ -307,7 +341,7 @@
             gap: 16px
         }
 
-        @media (max-width: 960px) {
+        @media (max-width:960px) {
             .kpis {
                 grid-template-columns: repeat(2, minmax(0, 1fr))
             }
@@ -372,10 +406,10 @@
             display: grid;
             gap: 16px;
             grid-template-columns: 1.2fr .8fr;
-            align-items: start;
+            align-items: start
         }
 
-        @media (max-width: 960px) {
+        @media (max-width:960px) {
             .plan {
                 grid-template-columns: 1fr
             }
@@ -435,7 +469,6 @@
             flex-wrap: wrap
         }
 
-        /* accessibility */
         :focus-visible {
             outline: none;
             box-shadow: var(--ring)
@@ -448,17 +481,71 @@
                 scroll-behavior: auto !important
             }
         }
+
+        /* ====== MOBILE NAV (≤768px) ====== */
+        @media (max-width:768px) {
+
+            /* mostrar botón y ocultar CTA grande */
+            .menu-toggle {
+                display: block;
+                margin-left: auto
+            }
+
+            .site-inner .cta {
+                display: none
+            }
+
+            /* menú como panel flotante a la derecha */
+            header.site nav ul {
+                display: none;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: rgba(5, 7, 13, 0.95);
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                flex-direction: column;
+                width: 220px;
+                padding: 12px 0;
+                border-radius: 0 0 0 var(--radius);
+                z-index: 1000;
+            }
+
+            header.site nav ul.open {
+                display: flex
+            }
+
+            header.site nav ul li {
+                margin: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.08)
+            }
+
+            header.site nav ul li:first-child {
+                border-top: none
+            }
+
+            header.site nav a {
+                display: block;
+                padding: 10px 16px;
+                color: #cfe0ff
+            }
+        }
     </style>
 </head>
 
 <body>
     <a class="skip-link" href="#main" style="position:absolute;left:-999px;opacity:0">Skip to content</a>
+
     <header class="site">
         <div class="site-inner container">
             <div class="brand">
                 <img src="assets/logo-ai-compass.png" alt="AI Compass Logo" style="height:48px; width:auto;" />
             </div>
-            <nav style="margin-left:auto">
+
+            <!-- Botón hamburguesa para móvil -->
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+
+            <nav>
                 <ul>
                     <li><a href="#solution">Product</a></li>
                     <li><a href="#how">How it works</a></li>
@@ -468,10 +555,8 @@
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
             </nav>
-            <a class="cta" href="https://calendly.com/thierry_moubax/ai-consultation-call?month=2025-11" target="_blank"
-                rel="noopener noreferrer">
-                Schedule a Strategy Session
-            </a>
+
+            <a class="cta" href="#pilot">Schedule a Strategy Session</a>
         </div>
     </header>
 
@@ -482,22 +567,21 @@
             <h1>Stop prospecting. <span style="color:var(--accent)">Start placing.</span></h1>
             <p class="lede">Turn hiring chaos into a 24/7 growth engine. AI Compass automates HR prospecting, ranks
                 accounts by <strong>Hiring Momentum</strong>, matches candidates with roles, and powers personalized
-                outreach — all with verified data and credit‑based control.</p>
+                outreach — all with verified data and credit-based control.</p>
             <div class="actions">
                 <a class="cta" href="#pilot">Validate the Concept Together</a>
                 <a class="cta secondary" href="https://calendly.com/thierry_moubax/ai-consultation-call?month=2025-11"
-                    target="_blank" rel="noopener noreferrer">Schedule a Strategy
-                    Session</a>
+                    target="_blank" rel="noopener noreferrer">Schedule a Strategy Session</a>
             </div>
-            <div class="panel strip"><small>Automation + AI + Verified Data · Contact previews · Credit‑based unlocks ·
-                    Real‑time dashboard</small></div>
+            <div class="panel strip"><small>Automation + AI + Verified Data · Contact previews · Credit-based unlocks ·
+                    Real-time dashboard</small></div>
         </section>
 
         <!-- PROBLEM -->
         <section id="problem" class="problem container stack">
             <h2 class="section-title">The current challenge</h2>
             <p class="muted">In a no cure · no pay model, minutes matter. Teams spend more time <em>finding</em> hiring
-                companies and decision‑makers than actually selecting candidates. AI Compass replaces the manual grind
+                companies and decision-makers than actually selecting candidates. AI Compass replaces the manual grind
                 with an automated, intelligent, and measurable flow that detects real opportunities in real time and
                 turns them into clients and placements.</p>
             <div class="grid cols-3">
@@ -506,7 +590,7 @@
                     <p class="muted">Hours lost scanning platforms, cleaning data, and mapping orgs.</p>
                 </div>
                 <div class="card">
-                    <h3>Low hit‑rate</h3>
+                    <h3>Low hit-rate</h3>
                     <p class="muted">Conversations start late and unfocused; the hottest accounts go cold.</p>
                 </div>
                 <div class="card">
@@ -524,14 +608,14 @@
                     <span class="badge">Engine 1 — HR Prospecting &amp; Matching</span>
                     <h3 style="margin-top:8px">Know who’s hiring <em>today</em> and who to talk to</h3>
                     <p class="muted">We scrape and classify job offers daily, enrich companies selectively, preview
-                        decision‑makers, and score accounts by Hiring Momentum so you focus on the ones most likely to
+                        decision-makers, and score accounts by Hiring Momentum so you focus on the ones most likely to
                         convert.</p>
                 </div>
                 <div class="card">
                     <span class="badge">Engine 2 — Candidate Prospecting &amp; Matching</span>
                     <h3 style="margin-top:8px">Activate the right candidates in hours</h3>
                     <p class="muted">AI builds smart queries, ranks profiles by a Candidate Fit Score, enriches top
-                        prospects, and launches compliant outreach with tracking and opt‑in capture.</p>
+                        prospects, and launches compliant outreach with tracking and opt-in capture.</p>
                 </div>
             </div>
         </section>
@@ -552,7 +636,7 @@
                     <div class="glyph">2</div>
                     <div>
                         <h3>Intelligent organization</h3>
-                        <p class="muted">De‑dupe, structure by company/role/date, and extract skills &amp; requirements
+                        <p class="muted">De-dupe, structure by company/role/date, and extract skills &amp; requirements
                             with AI.</p>
                     </div>
                 </div>
@@ -567,7 +651,7 @@
                 <div class="card step">
                     <div class="glyph">4</div>
                     <div>
-                        <h3>Decision‑maker preview</h3>
+                        <h3>Decision-maker preview</h3>
                         <p class="muted">See potential contacts without revealing details; unlock only when needed via
                             credits.</p>
                     </div>
@@ -616,7 +700,7 @@
                     <p class="muted">Go first to the companies most likely to hire.</p>
                 </div>
                 <div class="card">
-                    <h3>Credit‑based control</h3>
+                    <h3>Credit-based control</h3>
                     <p class="muted">Unlock only the contacts you need, when you need them.</p>
                 </div>
                 <div class="card">
@@ -624,7 +708,7 @@
                     <p class="muted">Generate proposals faster and win more placements.</p>
                 </div>
                 <div class="card">
-                    <h3>Real‑time measurement</h3>
+                    <h3>Real-time measurement</h3>
                     <p class="muted">Dashboards for activity, replies, and conversions.</p>
                 </div>
             </div>
@@ -642,7 +726,7 @@
                 </div>
                 <div class="kpi">
                     <div class="num"><span class="counter" data-value="300">0</span><small> contacts</small></div>
-                    <div class="muted">verified decision‑makers</div>
+                    <div class="muted">verified decision-makers</div>
                 </div>
                 <div class="kpi">
                     <div class="num"><span class="counter" data-value="50000">0</span><small> offers</small></div>
@@ -706,7 +790,7 @@
                             </tr>
                             <tr>
                                 <td>Automated outreach &amp; consent</td>
-                                <td>Personalized flows with tracking and GDPR‑friendly opt‑in.</td>
+                                <td>Personalized flows with tracking and GDPR-friendly opt-in.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -716,15 +800,15 @@
 
         <!-- PRICING / PILOT -->
         <section id="pricing" class="pricing container stack">
-            <h2 class="section-title">Start smart with a 30‑day pilot</h2>
+            <h2 class="section-title">Start smart with a 30-day pilot</h2>
             <div class="plan">
                 <div class="card">
                     <h3>What’s included</h3>
                     <ul class="muted">
-                        <li>Live view of companies actively hiring + decision‑maker previews</li>
+                        <li>Live view of companies actively hiring + decision-maker previews</li>
                         <li>Custom calibration of scraping, scoring, and outreach parameters</li>
                         <li>Dashboard access for activity, replies, and conversions</li>
-                        <li>Defined success KPIs &amp; weekly check‑ins</li>
+                        <li>Defined success KPIs &amp; weekly check-ins</li>
                     </ul>
                     <p class="muted">After the pilot, scale to full coverage with adjustable credit packs. Pricing
                         depends on markets and volumes.</p>
@@ -754,9 +838,9 @@
             <h2 class="section-title">FAQs</h2>
             <div class="grid cols-2">
                 <details open>
-                    <summary>What does “credit‑based unlocks” mean?</summary>
+                    <summary>What does “credit-based unlocks” mean?</summary>
                     <p class="muted">You control spend by choosing when to reveal contact details. Previews show likely
-                        decision‑makers; unlocking consumes credits only on value.</p>
+                        decision-makers; unlocking consumes credits only on value.</p>
                 </details>
                 <details>
                     <summary>Where do you source the data?</summary>
@@ -770,12 +854,12 @@
                 </details>
                 <details>
                     <summary>Are you GDPR compliant?</summary>
-                    <p class="muted">Yes. Outreach flows include opt‑in collection, consent tracking, and retention
+                    <p class="muted">Yes. Outreach flows include opt-in collection, consent tracking, and retention
                         controls.</p>
                 </details>
                 <details>
                     <summary>Can we start small?</summary>
-                    <p class="muted">Yes — the 30‑day pilot validates quality, speed, and conversion before scaling.</p>
+                    <p class="muted">Yes — the 30-day pilot validates quality, speed, and conversion before scaling.</p>
                 </details>
                 <details>
                     <summary>Do you integrate with our stack?</summary>
@@ -787,13 +871,12 @@
         <!-- FINAL CTA -->
         <section class="cta-final container stack" style="text-align:center">
             <h2 class="section-title">Ready to act where real opportunity exists?</h2>
-            <p class="muted">Implement the 30‑day pilot → evaluate metrics → scale to full coverage.</p>
+            <p class="muted">Implement the 30-day pilot → evaluate metrics → scale to full coverage.</p>
             <div class="actions" style="justify-content:center">
                 <a class="cta" href="https://calendly.com/thierry_moubax/ai-consultation-call?month=2025-11"
-                    target="_blank" rel="noopener noreferrer">
-                    Schedule a Strategy Session
-                </a>
-                <a class="cta secondary" href="mailto:thierry@aicompass.ai?subject=AI%20Compass%20Questions">Let’s Talk
+                    target="_blank" rel="noopener noreferrer">Schedule a Strategy Session</a>
+                <a class="cta secondary" href="https://calendly.com/thierry_moubax/ai-consultation-call?month=2025-11"
+                    target="_blank" rel="noopener noreferrer">Let’s Talk
                     Next Steps</a>
             </div>
         </section>
@@ -801,8 +884,8 @@
 
     <footer class="container stack">
         <div class="footlinks">
-            <span class="badge" title="Security & Privacy">GDPR‑friendly</span>
-            <span class="badge" title="Transparency">Credit‑based</span>
+            <span class="badge" title="Security & Privacy">GDPR-friendly</span>
+            <span class="badge" title="Transparency">Credit-based</span>
             <span class="badge" title="Always on">24/7 automation</span>
         </div>
         <div class="legal">© <span id="year"></span> AI Compass. All rights reserved.</div>
@@ -810,7 +893,8 @@
 
     <div class="ribbon" aria-hidden="true">
         <span>Implementation Plan</span>
-        <a class="cta" href="mailto:thierry@aicompass.ai?subject=AI%20Compass%20Questions">Let’s Talk</a>
+        <a class="cta" href="https://calendly.com/thierry_moubax/ai-consultation-call?month=2025-11" target="_blank"
+            rel="noopener noreferrer">Let’s Talk</a>
     </div>
 
     <script>
@@ -837,7 +921,7 @@
                         const value = +el.dataset.value;
                         const duration = 1000;
                         const start = performance.now();
-                        const format = (n) => n >= 1000 ? (Math.round(n / 100) / 10).toFixed(1) + 'k' : n.toLocaleString();
+                        const format = n => n >= 1000 ? (Math.round(n / 100) / 10).toFixed(1) + 'k' : n.toLocaleString();
                         function tick(now) {
                             const t = Math.min(1, (now - start) / duration);
                             const eased = 1 - Math.pow(1 - t, 3);
@@ -856,6 +940,26 @@
 
         // Year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu
+        (function () {
+            const toggle = document.querySelector('.menu-toggle');
+            const navList = document.querySelector('header.site nav ul');
+            if (!toggle || !navList) return;
+
+            toggle.addEventListener('click', () => {
+                const open = navList.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+
+            // cerrar menú al hacer click en un enlace
+            navList.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navList.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        })();
     </script>
 
     <script type="application/ld+json">
